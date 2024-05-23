@@ -6,3 +6,49 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           Int     @id @default(autoincrement())
+  username     String  @unique
+  password     String
+  email        String  @unique
+  isActive     Boolean @default(true)
+  blogs        Blog[]
+  editedBlogs  Blog[]  @relation("EditedByUser")
+}
+
+model Blog {
+  id            Int      @id @default(autoincrement())
+  title         String   @unique
+  description   String
+  image         String?
+  sources       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  published     Boolean  @default(false)
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      Int
+  editedByUser  User[]   @relation("EditedByUser")
+}
+
+// model User {
+//   id       Int     @id @default(autoincrement())
+//   username String  @unique
+//   password String
+//   email    String  @unique
+//   isActive Boolean @default(true)
+//   blogs    Blog[]
+// }
+
+// model Blog {
+//   id          Int      @id @default(autoincrement())
+//   title       String   @unique
+//   description String
+//   image       String?
+//   sources     String?
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   published   Boolean  @default(false)
+//   author      User     @relation(fields: [authorId], references: [id])
+//   authorId    Int
+// }
