@@ -1,6 +1,7 @@
 {
     "http":{
-        "NotFound": "مسیر یافت نشد"
+        "NotFound": "مسیر یافت نشد",
+        "InternalServerError": "خطای سروری پیش آمده است"
 
     },
     "module": {

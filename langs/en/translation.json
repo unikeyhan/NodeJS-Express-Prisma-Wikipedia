@@ -1,6 +1,7 @@
 {
     "http":{
-        "NotFound": "user not found"
+        "NotFound": "route not found",
+        "InternalServerError": "A server error has occurred"
 
     },
     "module": {
