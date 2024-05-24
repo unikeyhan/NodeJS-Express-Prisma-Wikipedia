@@ -32,18 +32,41 @@ class AuthController {
   @boundMethod
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-        const {username, password} = req.body;
-        const token = await this.#service.login(username, password);
-        return res.cookie(CookieNames.AccessToken, token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === NodeEnv.Production 
-        }).status(200).json({
-            message: t('module.auth.LoginSuccessfully'),
+      const { username, password } = req.body;
+      const token = await this.#service.login(username, password);
+      return res
+        .cookie(CookieNames.AccessToken, token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === NodeEnv.Production,
+        })
+        .status(200)
+        .json({
+          message: t('module.auth.LoginSuccessfully'),
         });
     } catch (error) {
-        next(error)
+      next(error);
     }
-}
+  }
+
+  @boundMethod
+  async signupPage(req: Request, res: Response, next: NextFunction) {
+    try{
+      res.locals.layout = "./layouts/index.ejs";
+      res.render("./pages/signup/index.ejs", {});
+    }catch(err) {
+      next(err)
+    }
+  }
+
+  @boundMethod
+  async loginPage(req: Request, res: Response, next: NextFunction) {
+    try{
+      res.locals.layout = "./layouts/index.ejs";
+      res.render("./pages/login/index.ejs", {});
+    }catch(err) {
+      next(err)
+    }
+  }
 }
 
 export default new AuthController();

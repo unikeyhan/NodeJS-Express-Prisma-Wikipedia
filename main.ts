@@ -17,7 +17,9 @@ async function main() {
   app.use(i18nextConfig);
   app.use(expressEjsLayouts);
   app.set('view engine', 'ejs');
-  app.set('layout', './layouts/panel/main.ejs');
+  app.set('layout', './layouts/index.ejs');
+  // app.set("layout extractScripts", true);
+  // app.set("layout extractStyles", true);
   app.use(mainRouter);
   SwaggerConfig(app);
   NotFoundHandler(app);
