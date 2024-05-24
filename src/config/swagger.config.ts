@@ -11,7 +11,7 @@ const SwaggerConfig = (app:Express) => {
                 version: '1.0.0',
             },
         },
-        apis: [process.cwd() + '/src/modules/**/*.swagger.js'],
+        apis: [process.cwd() + '/src/modules/**/*.swagger.ts'],
     });
     const swagger = swaggerUi.setup(swaggerDocument, {});
     app.use('/swagger', swaggerUi.serve, swagger);

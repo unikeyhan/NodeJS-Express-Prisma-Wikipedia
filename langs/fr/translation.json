@@ -1,3 +1,14 @@
 {
-    "greeting": "سلام"
+    "http":{
+        "NotFound": "مسیر یافت نشد"
+
+    },
+    "module": {
+        "auth": {
+            "UserExist":"کاربر با این اطلاعات وجود دارد",
+            "LoginSuccessfully": "ورود با موفقیت انجام شد",
+            "SignupSuccessfully": "ثبت نام با موفقیت انجام شد",
+            "LogoutSuccessfully": "خروج با موفقیت انجام شد"
+        }
+    }
 }

@@ -1,3 +1,14 @@
 {
-    "hello": "hello"
+    "http":{
+        "NotFound": "user not found"
+
+    },
+    "module": {
+        "auth": {
+            "UserExist":"There is a user with this information",
+            "LoginSuccessfully": "login successfully",
+            "SignupSuccessfully": "Signup successfully",
+            "LogoutSuccessfully": "Successfully logged out"
+        }
+    }
 }
