@@ -7,9 +7,11 @@
     "module": {
         "auth": {
             "UserExist":"There is a user with this information",
+            "UserNotExist":"There is't any user with this information",
             "LoginSuccessfully": "login successfully",
             "SignupSuccessfully": "Signup successfully",
-            "LogoutSuccessfully": "Successfully logged out"
+            "LogoutSuccessfully": "Successfully logged out",
+            "WrongPassword":"the password is wrong"
         }
     }
 }

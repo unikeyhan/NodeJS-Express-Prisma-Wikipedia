@@ -22,6 +22,16 @@
  *                      type: string
  *                  email:
  *                      type: string
+  *          Login:
+ *              type: object
+ *              required:
+ *                  -   username
+ *                  -   password
+ *              properties:
+ *                  username:
+ *                      type: string
+ *                  password:
+ *                      type: string
  */
 
 /**
@@ -29,7 +39,7 @@
  * 
  * /auth/signup:
  *  post:
- *      summary: login with OTP in this end-point
+ *      summary: signup with username, email and password
  *      tags:
  *          -   Auth
  *      requestBody:
@@ -40,6 +50,27 @@
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Signup'
+ *      responses:
+ *          200:
+ *              description: success
+ */
+
+/**
+ * @swagger
+ * 
+ * /auth/login:
+ *  post:
+ *      summary: login with username and password
+ *      tags:
+ *          -   Auth
+ *      requestBody:
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Login'
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Login'
  *      responses:
  *          200:
  *              description: success

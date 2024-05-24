@@ -28,6 +28,22 @@ class AuthController {
       next(error);
     }
   }
+
+  @boundMethod
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+        const {username, password} = req.body;
+        const token = await this.#service.login(username, password);
+        return res.cookie(CookieNames.AccessToken, token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === NodeEnv.Production 
+        }).status(200).json({
+            message: t('module.auth.LoginSuccessfully'),
+        });
+    } catch (error) {
+        next(error)
+    }
+}
 }
 
 export default new AuthController();

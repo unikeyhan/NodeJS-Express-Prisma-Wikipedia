@@ -7,9 +7,11 @@
     "module": {
         "auth": {
             "UserExist":"کاربر با این اطلاعات وجود دارد",
+            "UserNotExist":"هیچ کاربری با این اطلاعات یافت نشد",
             "LoginSuccessfully": "ورود با موفقیت انجام شد",
             "SignupSuccessfully": "ثبت نام با موفقیت انجام شد",
-            "LogoutSuccessfully": "خروج با موفقیت انجام شد"
+            "LogoutSuccessfully": "خروج با موفقیت انجام شد",
+            "WrongPassword":"پسورد اشتباه است"
         }
     }
 }

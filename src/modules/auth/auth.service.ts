@@ -14,12 +14,12 @@ class AuthService {
   }
   @boundMethod
   async signup(username: string, password: string, email: string) {
-    const existUser = await this.#prismaModel.user.findMany({
+    const existUser = await this.#prismaModel.user.findFirst({
       where: {
         OR: [{ email: email }, { username: username }],
       },
     });
-    if (existUser.length) {
+    if (existUser) {
       throw new createHttpError.BadRequest(t('module.auth.UserExist'));
     }
     const salt = await bcrypt.genSalt(10);
@@ -29,12 +29,30 @@ class AuthService {
       const accessToken = this.signToken({ username, userId: newUser.id });
       return accessToken;
     }
+  }
+  @boundMethod
+  async login(username: string, password: string) {
+    const user = await this.#prismaModel.user.findFirst({
+      where: {
+        OR: [{ username: username }],
+      },
+    });
+    if (!user) {
+      throw new createHttpError.BadRequest(t('module.auth.UserNotExist'));
+    }
 
-    // const user = await this.#prismaModel.user.create({ username, password, email });
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      throw new createHttpError.BadRequest(t('module.auth.WrongPassword'));
+    }
+
+    const accessToken = this.signToken({ username: user.username, userId: user.id });
+    return accessToken;
   }
 
   @boundMethod
-  signToken({ username, userId }:any) {
+  signToken({ username, userId }: any) {
     return jwt.sign({ username, userId }, process.env.JWT_SECRET_KEY as string, { expiresIn: '1y' });
   }
 }
